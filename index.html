@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEED Platform v10.x - Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --bg-color: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-color: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --code-bg: #f1f5f9;
+            --sidebar-width: 280px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .sidebar-header {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-header p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .nav-links {
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-links a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+        
+        .nav-links a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 3rem;
+            max-width: 1200px;
+        }
+        
+        .doc-section {
+            margin-bottom: 4rem;
+        }
+        
+        .doc-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875em;
+            color: var(--danger-color);
+        }
+        
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-color);
+            font-size: 0.875rem;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover {
+            background: var(--bg-secondary);
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .badge-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+        
+        .alert-success {
+            background: #d1fae5;
+            border-color: var(--success-color);
+            color: #065f46;
+        }
+        
+        .alert-warning {
+            background: #fef3c7;
+            border-color: var(--warning-color);
+            color: #92400e;
+        }
+        
+        .alert-info {
+            background: #dbeafe;
+            border-color: var(--primary-color);
+            color: #1e40af;
+        }
+        
+        .command-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .command-box code {
+            background: none;
+            color: #10b981;
+            padding: 0;
+        }
+        
+        .top-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .top-banner h1 {
+            color: white;
+            border: none;
+            margin: 0;
+            padding: 0;
+            font-size: 1.5rem;
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .scroll-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-4px);
+        }
+        
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+        
+        @media print {
+            .sidebar, .scroll-to-top, .top-banner {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-banner">
+        <h1>🚀 SEED Platform v10.x Documentation</h1>
+    </div>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>📚 Docs</h1>
+                <p>Complete Guide</p>
+            </div>
+            
+            <nav class="nav-section">
+                <div class="nav-section-title">Quick Start</div>
+                <ul class="nav-links">
+                    <li><a href="#quickstart">Quick Start Guide</a></li>
+                    <li><a href="#qs-prerequisites">Prerequisites</a></li>
+                    <li><a href="#qs-setup">Quick Setup</a></li>
+                    <li><a href="#qs-next">Next Steps</a></li>
+                </ul>
+            </nav>
+            
+            <nav class="nav-section">
+                <div class="nav-section-title">Usage Guide</div>
+                <ul class="nav-links">
+                    <li><a href="#usage">Usage Guide</a></li>
+                    <li><a href="#initial-setup">Initial Setup</a></li>
+                    <li><a href="#generating-artifacts">Generating Artifacts</a></li>
+                    <li><a href="#verifying-bundles">Verifying Bundles</a></li>
+                    <li><a href="#docker-deployment">Docker Deployment</a></li>
+                    <li><a href="#air-gapped-verification">Air-Gapped Verification</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                </ul>
+            </nav>
+            
+            <nav class="nav-section">
+                <div class="nav-section-title">Resources</div>
+                <ul class="nav-links">
+                    <li><a href="#advanced-usage">Advanced Usage</a></li>
+                    <li><a href="#best-practices">Best Practices</a></li>
+                    <li><a href="#file-formats">File Formats</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <section class="doc-section" id="quickstart">
+                <h1 id="seed-platform-v10x-quick-start">SEED Platform v10.x - Quick Start</h1>
+<p>Get started with the SEED Platform in 5 minutes.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Node.js 18+ installed</li>
+<li>Docker and Docker Compose (optional, for deployment)</li>
+</ul>
+<h2 id="quick-setup">Quick Setup</h2>
+<h3 id="1-install-dependencies">1. Install Dependencies</h3>
+<pre><code class="language-bash">cd seed-platform-v10x/scripts
+npm install
+</code></pre>
+<h3 id="2-test-with-example-bundles">2. Test with Example Bundles</h3>
+<p>The platform includes test bundles. Generate artifacts:</p>
+<pre><code class="language-bash">npm run send-share
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>send-share complete:
+  sha256.txt: double-space format
+  signatures.json: 64-hex siblings, 128-hex signatures
+</code></pre>
+<h3 id="3-verify-generated-artifacts">3. Verify Generated Artifacts</h3>
+<pre><code class="language-bash">npm run verify
+</code></pre>
+<p><strong>Expected Result:</strong></p>
+<pre><code>✅ ALL CHECKS PASSED (STRICT FORMAT)
+</code></pre>
+<h2 id="what-just-happened">What Just Happened?</h2>
+<ol>
+<li><strong>send-share.cjs</strong> scanned <code>artifacts/bundles/</code> for <code>.tar.gz</code> files</li>
+<li>Generated <code>artifacts/sha256.txt</code> with exact double-space format</li>
+<li>Generated <code>artifacts/signatures.json</code> with Merkle proofs</li>
+<li><strong>verify-bundle.ts</strong> validated all checksums, proofs, and signatures</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<h3 id="add-your-own-bundles">Add Your Own Bundles</h3>
+<pre><code class="language-bash"># Remove test bundles
+rm artifacts/bundles/*.tar.gz
+
+# Add your bundles
+cp /path/to/your/bundle.tar.gz artifacts/bundles/
+
+# Regenerate artifacts
+cd scripts
+npm run send-share
+npm run verify
+</code></pre>
+<h3 id="add-real-public-keys">Add Real Public Keys</h3>
+<pre><code class="language-bash"># Remove example key
+rm backend/keys/signer-example.pub.example
+
+# Add your Ed25519 public key (64 hex chars)
+echo &quot;your-64-hex-public-key&quot; &gt; backend/keys/signer-production.pub
+
+# Verify again
+cd scripts
+npm run verify
+</code></pre>
+<h3 id="deploy-with-docker">Deploy with Docker</h3>
+<pre><code class="language-bash"># Build or pull your Docker image
+docker build -t seed10x-production:latest .
+
+# Start the platform
+docker-compose up -d
+
+# Check logs
+docker-compose logs -f
+</code></pre>
+<h2 id="common-commands">Common Commands</h2>
+<pre><code class="language-bash"># Generate artifacts
+npm run send-share
+
+# Verify bundles (online)
+npm run verify
+
+# Verify bundles (air-gapped)
+npm run airgap-verify -- /path/to/bundle
+
+# View generated checksums
+cat ../artifacts/sha256.txt
+
+# View signatures
+cat ../artifacts/signatures.json | jq .
+</code></pre>
+<h2 id="file-structure">File Structure</h2>
+<pre><code>seed-platform-v10x/
+├── scripts/
+│   ├── send-share.cjs      # Generate artifacts
+│   ├── verify-bundle.ts    # Verify online
+│   └── airgap-verify.ts    # Verify offline
+├── artifacts/
+│   ├── bundles/            # Your .tar.gz files
+│   ├── sha256.txt          # Generated checksums
+│   └── signatures.json     # Generated proofs
+└── backend/
+    └── keys/               # Public keys (*.pub)
+</code></pre>
+<h2 id="verification-flow">Verification Flow</h2>
+<pre><code>[Bundles] → [send-share] → [sha256.txt + signatures.json]
+                                    ↓
+                              [verify-bundle]
+                                    ↓
+                        ✅ SHA256 + Merkle + Signatures
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p><strong>"No public keys found"</strong>
+- Add at least one <code>.pub</code> file to <code>backend/keys/</code>
+- Format: 64 hexadecimal characters</p>
+<p><strong>"Missing bundles"</strong>
+- Add <code>.tar.gz</code> files to <code>artifacts/bundles/</code>
+- Run <code>npm run send-share</code> to generate artifacts</p>
+<p><strong>"Signature validation failed"</strong>
+- This is expected with placeholder signatures
+- Add real Ed25519 signatures for production</p>
+<h2 id="learn-more">Learn More</h2>
+<ul>
+<li><strong>README.md</strong> - Complete documentation</li>
+<li><strong>USAGE_GUIDE.md</strong> - Detailed step-by-step guide</li>
+<li><strong>docker-compose.yml</strong> - Deployment configuration</li>
+</ul>
+<h2 id="support">Support</h2>
+<p>For issues or questions, refer to the full documentation or contact platform maintainers.</p>
+<hr />
+<p><strong>Ready to go!</strong> Start by running <code>npm run send-share</code> in the <code>scripts/</code> directory.</p>
+            </section>
+            
+            <hr style="margin: 4rem 0; border: none; border-top: 2px solid var(--border-color);">
+            
+            <section class="doc-section" id="usage">
+                <h1 id="seed-platform-v10x-usage-guide">SEED Platform v10.x - Usage Guide</h1>
+<p>This guide provides step-by-step instructions for using the SEED Platform v10.x production artifact system.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#initial-setup">Initial Setup</a></li>
+<li><a href="#generating-artifacts">Generating Artifacts</a></li>
+<li><a href="#verifying-bundles">Verifying Bundles</a></li>
+<li><a href="#docker-deployment">Docker Deployment</a></li>
+<li><a href="#air-gapped-verification">Air-Gapped Verification</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ol>
+<h2 id="initial-setup">Initial Setup</h2>
+<h3 id="step-1-install-nodejs-dependencies">Step 1: Install Node.js Dependencies</h3>
+<pre><code class="language-bash">cd seed-platform-v10x/scripts
+npm install
+</code></pre>
+<p>This installs:
+- <code>@noble/ed25519</code> - Ed25519 signature verification
+- <code>qrcode</code> - QR code generation
+- <code>tsx</code> - TypeScript execution</p>
+<h3 id="step-2-prepare-public-keys">Step 2: Prepare Public Keys</h3>
+<p>Add your Ed25519 public keys to <code>backend/keys/</code>:</p>
+<pre><code class="language-bash"># Example: Create a public key file
+echo &quot;your-64-hex-public-key-here&quot; &gt; backend/keys/signer-master-2025.pub
+</code></pre>
+<p><strong>Format Requirements:</strong>
+- Filename: <code>signer-*.pub</code> (e.g., <code>signer-master-2025.pub</code>)
+- Content: 64 hexadecimal characters (32 bytes)
+- No spaces or line breaks</p>
+<h3 id="step-3-prepare-bundle-files">Step 3: Prepare Bundle Files</h3>
+<p>Place your artifact bundles in <code>artifacts/bundles/</code>:</p>
+<pre><code class="language-bash"># Example: Copy your bundles
+cp /path/to/your/bundle-v1.0.0.tar.gz artifacts/bundles/
+cp /path/to/your/bundle-v1.0.1.tar.gz artifacts/bundles/
+</code></pre>
+<p><strong>Supported Formats:</strong>
+- <code>.tar.gz</code> files only
+- Any size supported
+- Multiple bundles allowed</p>
+<h2 id="generating-artifacts">Generating Artifacts</h2>
+<h3 id="step-1-run-send-share-script">Step 1: Run send-share Script</h3>
+<pre><code class="language-bash">cd scripts
+npm run send-share
+</code></pre>
+<p>Or directly:</p>
+<pre><code class="language-bash">node send-share.cjs
+</code></pre>
+<h3 id="step-2-verify-generated-files">Step 2: Verify Generated Files</h3>
+<p>Check that the following files were created:</p>
+<pre><code class="language-bash">ls -lh ../artifacts/sha256.txt
+ls -lh ../artifacts/signatures.json
+</code></pre>
+<h3 id="step-3-inspect-output-format">Step 3: Inspect Output Format</h3>
+<p><strong>sha256.txt format:</strong></p>
+<pre><code>&lt;64-hex-hash&gt;&lt;two-spaces&gt;&lt;filename&gt;
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-bash">cat ../artifacts/sha256.txt
+</code></pre>
+<p>Output:</p>
+<pre><code>724362907ca0ef2c8c82a2db6b859c4e2853318e2fd3f647a0c4c532bc8711d8  bundle-v1.0.0.tar.gz
+a11150e0a63526853a0da340f47a750c58287ad8094f54d0a41c8d6305f79ef2  bundle-v1.0.1.tar.gz
+</code></pre>
+<p><strong>signatures.json format:</strong></p>
+<pre><code class="language-bash">cat ../artifacts/signatures.json | jq .
+</code></pre>
+<p>Key fields:
+- <code>merkle_root</code>: 64-hex root hash
+- <code>bundles[].sha256</code>: 64-hex file hash
+- <code>bundles[].merkle_proof</code>: Array of L/R siblings (64-hex each)
+- <code>bundles[].signatures[].signatureHex</code>: 128-hex signature</p>
+<h2 id="verifying-bundles">Verifying Bundles</h2>
+<h3 id="online-verification-full-system">Online Verification (Full System)</h3>
+<pre><code class="language-bash">cd scripts
+npm run verify
+</code></pre>
+<p>This performs three validation steps:</p>
+<p><strong>1. SHA256 Validation</strong>
+- Computes SHA256 of each bundle file
+- Compares against <code>sha256.txt</code>
+- Compares against <code>signatures.json</code></p>
+<p><strong>2. Merkle Proof Validation</strong>
+- Verifies each bundle's proof path
+- Validates against merkle_root
+- Ensures proof structure integrity</p>
+<p><strong>3. Ed25519 Signature Validation</strong>
+- Loads public keys from <code>backend/keys/*.pub</code>
+- Verifies signatures against merkle_root
+- Validates k-of-n threshold</p>
+<h3 id="expected-output">Expected Output</h3>
+<pre><code>== verify-bundle (STRICT) ==
+Bundles dir : /path/to/artifacts/bundles
+Keys dir    : /path/to/backend/keys
+Merkle root : da1fc820e2994532bc73955b85856d383491966b706f6ca75f8b939c087bd3e4
+
+[1] SHA256 validation…
+  ✅ bundle-v1.0.0.tar.gz
+  ✅ bundle-v1.0.1.tar.gz
+
+[2] Merkle proof validation…
+  ✅ bundle-v1.0.0.tar.gz
+  ✅ bundle-v1.0.1.tar.gz
+
+[3] Ed25519 k-of-n signature validation…
+  ✅ seed-master-2025
+
+Signatures valid: 1/1 required
+
+✅ ALL CHECKS PASSED (STRICT FORMAT)
+</code></pre>
+<h3 id="verification-failures">Verification Failures</h3>
+<p>If verification fails, you'll see specific error messages:</p>
+<pre><code class="language-bash">❌ sha mismatch: bundle-v1.0.0.tar.gz
+❌ merkle proof failed: bundle-v1.0.1.tar.gz
+❌ seed-master-2025
+</code></pre>
+<h2 id="docker-deployment">Docker Deployment</h2>
+<h3 id="step-1-build-docker-image-if-needed">Step 1: Build Docker Image (if needed)</h3>
+<pre><code class="language-bash"># If you have a Dockerfile
+docker build -t seed10x-production:latest .
+</code></pre>
+<p>Or pull from registry:</p>
+<pre><code class="language-bash">docker pull your-registry/seed10x-production:latest
+</code></pre>
+<h3 id="step-2-configure-environment">Step 2: Configure Environment</h3>
+<p>Edit <code>docker-compose.yml</code> if needed:</p>
+<pre><code class="language-yaml">environment:
+  - SEED_ARTIFACT_MODE=local
+  - SEED_ARTIFACT_PATH=/app/artifacts
+  - SEED_TIER1_AUTO_INITIATE=true
+  - SEED_TIER2_AUTO_INITIATE=true
+</code></pre>
+<h3 id="step-3-start-platform">Step 3: Start Platform</h3>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+<h3 id="step-4-verify-running-container">Step 4: Verify Running Container</h3>
+<pre><code class="language-bash">docker-compose ps
+docker-compose logs -f
+</code></pre>
+<h3 id="step-5-access-platform">Step 5: Access Platform</h3>
+<p>The platform runs on port 8000:</p>
+<pre><code class="language-bash">curl http://localhost:8000
+</code></pre>
+<h3 id="step-6-stop-platform">Step 6: Stop Platform</h3>
+<pre><code class="language-bash">docker-compose down
+</code></pre>
+<h2 id="air-gapped-verification">Air-Gapped Verification</h2>
+<p>For offline/air-gapped environments, use the <code>airgap-verify.ts</code> script.</p>
+<h3 id="step-1-prepare-bundle-structure">Step 1: Prepare Bundle Structure</h3>
+<p>Create the following directory structure:</p>
+<pre><code>bundle/
+├── images/
+│   ├── checksums.txt
+│   ├── bundle-v1.0.0.tar.gz
+│   └── bundle-v1.0.1.tar.gz
+├── keys/
+│   └── signer-master-2025.pub
+└── manifests/
+    └── signatures.json
+</code></pre>
+<h3 id="step-2-create-checksumstxt">Step 2: Create checksums.txt</h3>
+<p>Format: <code>&lt;64-hex-hash&gt; &lt;filename&gt;</code> or <code>&lt;64-hex-hash&gt; *&lt;filename&gt;</code></p>
+<pre><code class="language-bash">cd bundle/images
+sha256sum *.tar.gz &gt; checksums.txt
+</code></pre>
+<p>Example content:</p>
+<pre><code>724362907ca0ef2c8c82a2db6b859c4e2853318e2fd3f647a0c4c532bc8711d8 bundle-v1.0.0.tar.gz
+a11150e0a63526853a0da340f47a750c58287ad8094f54d0a41c8d6305f79ef2 bundle-v1.0.1.tar.gz
+</code></pre>
+<h3 id="step-3-copy-public-keys">Step 3: Copy Public Keys</h3>
+<pre><code class="language-bash">cp /path/to/backend/keys/*.pub bundle/keys/
+</code></pre>
+<h3 id="step-4-copy-signaturesjson">Step 4: Copy signatures.json</h3>
+<pre><code class="language-bash">cp /path/to/artifacts/signatures.json bundle/manifests/
+</code></pre>
+<h3 id="step-5-run-air-gapped-verification">Step 5: Run Air-Gapped Verification</h3>
+<pre><code class="language-bash">cd scripts
+npm run airgap-verify -- /path/to/bundle
+</code></pre>
+<p>Or directly:</p>
+<pre><code class="language-bash">tsx airgap-verify.ts /path/to/bundle
+</code></pre>
+<h3 id="expected-output_1">Expected Output</h3>
+<pre><code>=== airgap-verify (STRICT) ===
+Bundle root: /path/to/bundle
+
+[1] Image checksum validation…
+  ✅ bundle-v1.0.0.tar.gz
+  ✅ bundle-v1.0.1.tar.gz
+
+[2] signatures.json structure + merkle proofs…
+  ✅ bundle-v1.0.0.tar.gz
+  ✅ bundle-v1.0.1.tar.gz
+
+[3] Signature quorum validation…
+  ✅ seed-master-2025
+
+Valid signatures: 1/1 required
+
+✅ AIRGAP VERIFIED (STRICT FORMAT)
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="issue-no-public-keys-found">Issue: "No public keys found"</h3>
+<p><strong>Error:</strong></p>
+<pre><code>❌ No public keys found in backend/keys/*.pub
+</code></pre>
+<p><strong>Solution:</strong>
+1. Check that public key files exist: <code>ls backend/keys/*.pub</code>
+2. Verify filename format: <code>signer-*.pub</code>
+3. Verify content format: 64 hexadecimal characters
+4. Example: <code>echo "0123456789abcdef..." &gt; backend/keys/signer-test.pub</code></p>
+<h3 id="issue-sha256-mismatch">Issue: "SHA256 mismatch"</h3>
+<p><strong>Error:</strong></p>
+<pre><code>❌ sha mismatch: bundle-v1.0.0.tar.gz
+</code></pre>
+<p><strong>Solution:</strong>
+1. Verify file integrity: <code>sha256sum artifacts/bundles/bundle-v1.0.0.tar.gz</code>
+2. Regenerate artifacts: <code>npm run send-share</code>
+3. Check for file corruption during transfer
+4. Ensure no modifications after generation</p>
+<h3 id="issue-merkle-proof-failed">Issue: "Merkle proof failed"</h3>
+<p><strong>Error:</strong></p>
+<pre><code>❌ merkle proof failed: bundle-v1.0.0.tar.gz
+</code></pre>
+<p><strong>Solution:</strong>
+1. Regenerate signatures.json: <code>npm run send-share</code>
+2. Verify all bundles are present in <code>artifacts/bundles/</code>
+3. Check that no bundles were added/removed after generation
+4. Ensure deterministic ordering (alphabetical)</p>
+<h3 id="issue-invalid-signaturehex">Issue: "Invalid signatureHex"</h3>
+<p><strong>Error:</strong></p>
+<pre><code>❌ signatureHex must be 128 hex: seed-master-2025
+</code></pre>
+<p><strong>Solution:</strong>
+1. Verify signature format in signatures.json
+2. Ensure 128 hexadecimal characters (64 bytes)
+3. Check for proper Ed25519 signature generation
+4. Regenerate with correct signing process</p>
+<h3 id="issue-missing-signaturesjson">Issue: "Missing signatures.json"</h3>
+<p><strong>Error:</strong></p>
+<pre><code>❌ Missing /path/to/artifacts/bundles/signatures.json
+</code></pre>
+<p><strong>Solution:</strong>
+1. Run send-share script: <code>npm run send-share</code>
+2. Check that bundles exist in <code>artifacts/bundles/</code>
+3. Verify write permissions on <code>artifacts/</code> directory
+4. Check for script execution errors</p>
+<h3 id="issue-signature-validation-failed">Issue: "Signature validation failed"</h3>
+<p><strong>Error:</strong></p>
+<pre><code>❌ seed-master-2025
+Signatures valid: 0/1 required
+</code></pre>
+<p><strong>Solution:</strong>
+1. Verify public key matches private key used for signing
+2. Check public key format (64 hex characters)
+3. Verify signature was generated for correct merkle_root
+4. Ensure Ed25519 algorithm compatibility</p>
+<h3 id="issue-module-not-found">Issue: "Module not found"</h3>
+<p><strong>Error:</strong></p>
+<pre><code>Error: Cannot find module '@noble/ed25519'
+</code></pre>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash">cd scripts
+npm install
+</code></pre>
+<h3 id="issue-docker-container-wont-start">Issue: "Docker container won't start"</h3>
+<p><strong>Error:</strong></p>
+<pre><code>Error response from daemon: pull access denied for seed10x-production
+</code></pre>
+<p><strong>Solution:</strong>
+1. Build image locally: <code>docker build -t seed10x-production:latest .</code>
+2. Or pull from correct registry: <code>docker pull your-registry/seed10x-production:latest</code>
+3. Check image name in docker-compose.yml
+4. Verify Docker registry authentication</p>
+<h2 id="advanced-usage">Advanced Usage</h2>
+<h3 id="custom-artifact-root">Custom Artifact Root</h3>
+<p>Set <code>ARTIFACT_ROOT</code> environment variable:</p>
+<pre><code class="language-bash">export ARTIFACT_ROOT=/custom/path
+npm run verify
+</code></pre>
+<h3 id="multiple-signers-k-of-n">Multiple Signers (k-of-n)</h3>
+<ol>
+<li>Add multiple public keys to <code>backend/keys/</code>:</li>
+</ol>
+<pre><code class="language-bash">echo &quot;pubkey1...&quot; &gt; backend/keys/signer-alice.pub
+echo &quot;pubkey2...&quot; &gt; backend/keys/signer-bob.pub
+echo &quot;pubkey3...&quot; &gt; backend/keys/signer-charlie.pub
+</code></pre>
+<ol>
+<li>Set k_threshold in signatures.json:</li>
+</ol>
+<pre><code class="language-json">{
+  &quot;merkle_root&quot;: &quot;...&quot;,
+  &quot;k_threshold&quot;: 2,
+  &quot;bundles&quot;: [...]
+}
+</code></pre>
+<ol>
+<li>Verification requires at least k valid signatures</li>
+</ol>
+<h3 id="programmatic-usage">Programmatic Usage</h3>
+<p><strong>TypeScript/JavaScript:</strong></p>
+<pre><code class="language-typescript">import { execSync } from 'child_process';
+
+// Generate artifacts
+execSync('node send-share.cjs', { cwd: 'scripts' });
+
+// Verify bundles
+execSync('tsx verify-bundle.ts', { cwd: 'scripts' });
+</code></pre>
+<p><strong>Python:</strong></p>
+<pre><code class="language-python">import subprocess
+
+# Generate artifacts
+subprocess.run(['node', 'send-share.cjs'], cwd='scripts')
+
+# Verify bundles
+subprocess.run(['npx', 'tsx', 'verify-bundle.ts'], cwd='scripts')
+</code></pre>
+<h3 id="cicd-integration">CI/CD Integration</h3>
+<p><strong>GitHub Actions:</strong></p>
+<pre><code class="language-yaml">- name: Generate Artifacts
+  run: |
+    cd scripts
+    npm install
+    npm run send-share
+
+- name: Verify Bundles
+  run: |
+    cd scripts
+    npm run verify
+</code></pre>
+<p><strong>GitLab CI:</strong></p>
+<pre><code class="language-yaml">verify:
+  script:
+    - cd scripts
+    - npm install
+    - npm run send-share
+    - npm run verify
+</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Always verify after generation</strong>: Run <code>npm run verify</code> immediately after <code>npm run send-share</code></li>
+<li><strong>Keep keys secure</strong>: Never commit private keys to version control</li>
+<li><strong>Use k-of-n signatures</strong>: Require multiple signers for production</li>
+<li><strong>Automate verification</strong>: Integrate into CI/CD pipeline</li>
+<li><strong>Document key management</strong>: Maintain clear records of key ownership</li>
+<li><strong>Test air-gapped flow</strong>: Regularly test offline verification process</li>
+<li><strong>Monitor bundle integrity</strong>: Set up alerts for verification failures</li>
+<li><strong>Version control artifacts</strong>: Tag releases with corresponding bundle versions</li>
+</ol>
+<h2 id="support">Support</h2>
+<p>For additional help:
+1. Check the main README.md
+2. Review error messages carefully
+3. Verify all prerequisites are met
+4. Test with example bundles first
+5. Contact platform maintainers</p>
+<h2 id="appendix-file-format-specifications">Appendix: File Format Specifications</h2>
+<h3 id="sha256txt-format">sha256.txt Format</h3>
+<pre><code>&lt;64-hex-hash&gt;&lt;TWO-SPACES&gt;&lt;filename&gt;\n
+</code></pre>
+<ul>
+<li>Hash: Exactly 64 hexadecimal characters (lowercase)</li>
+<li>Separator: Exactly TWO space characters (ASCII 32)</li>
+<li>Filename: Original bundle filename</li>
+<li>Line ending: Unix LF (\n)</li>
+<li>No trailing whitespace</li>
+</ul>
+<h3 id="signaturesjson-format">signatures.json Format</h3>
+<pre><code class="language-json">{
+  &quot;merkle_root&quot;: &quot;64-hex-string&quot;,
+  &quot;k_threshold&quot;: 1,
+  &quot;n_signers&quot;: 3,
+  &quot;bundles&quot;: [
+    {
+      &quot;file&quot;: &quot;bundle-name.tar.gz&quot;,
+      &quot;sha256&quot;: &quot;64-hex-string&quot;,
+      &quot;merkle_proof&quot;: [
+        { &quot;side&quot;: &quot;L&quot;, &quot;sibling&quot;: &quot;64-hex-string&quot; },
+        { &quot;side&quot;: &quot;R&quot;, &quot;sibling&quot;: &quot;64-hex-string&quot; }
+      ],
+      &quot;signatures&quot;: [
+        {
+          &quot;signerId&quot;: &quot;signer-name&quot;,
+          &quot;signatureHex&quot;: &quot;128-hex-string&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<ul>
+<li>All hex strings: lowercase</li>
+<li>merkle_root: 64 hex (32 bytes)</li>
+<li>sha256: 64 hex (32 bytes)</li>
+<li>sibling: 64 hex (32 bytes)</li>
+<li>signatureHex: 128 hex (64 bytes)</li>
+<li>side: "L" or "R" only</li>
+</ul>
+<h3 id="public-key-format">Public Key Format</h3>
+<pre><code>&lt;64-hex-string&gt;
+</code></pre>
+<ul>
+<li>Filename: <code>signer-*.pub</code></li>
+<li>Content: 64 hexadecimal characters (lowercase)</li>
+<li>Represents: Ed25519 public key (32 bytes)</li>
+<li>No spaces, no line breaks</li>
+<li>Example: <code>0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef</code></li>
+</ul>
+            </section>
+        </main>
+    </div>
+    
+    <div class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </div>
+    
+    <script>
+        // Scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.querySelector('.scroll-to-top');
+            if (window.pageYOffset > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add IDs to headings for navigation
+        document.querySelectorAll('h2, h3').forEach((heading, index) => {
+            if (!heading.id) {
+                const id = heading.textContent.toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '');
+                heading.id = id;
+            }
+        });
+        
+        // Highlight code blocks
+        document.querySelectorAll('pre code').forEach((block) => {
+            // Add bash prompt styling
+            if (block.textContent.includes('$') || block.textContent.includes('#')) {
+                block.parentElement.classList.add('command-box');
+            }
+        });
+        
+        // Add badges to certain text
+        document.querySelectorAll('p, li').forEach((element) => {
+            let html = element.innerHTML;
+            html = html.replace(/✅/g, '<span class="badge badge-success">✅</span>');
+            html = html.replace(/⚠️/g, '<span class="badge badge-warning">⚠️</span>');
+            html = html.replace(/🔒/g, '<span class="badge badge-info">🔒</span>');
+            element.innerHTML = html;
+        });
+    </script>
+</body>
+</html>
